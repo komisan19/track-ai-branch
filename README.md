@@ -1,54 +1,56 @@
 # AI Commit Tracker
 
-AI Commit Trackerは、指定されたGitリポジトリ内で、特定の作者（AIアシスタントなど）によって作成されたコミット数を集計するためのシンプルなCLIツールです。
+AI Commit Tracker is a simple CLI tool that analyzes a Git repository and counts commits made by a specific author (for example, an AI assistant).
 
-## 機能
+## Features
 
-- 公開されている任意のGitリポジトリを分析します。
-- 特定の作者名（文字列で指定）が含まれるコミットを検索します。
-- リポジトリ名と、該当するコミットの総数を表示します。
+- Analyzes any public Git repository.
+- Filters commits by author name.
+- Prints the repository name and the total matching commit count.
 
-## インストール
+## Requirements
 
-Go言語の環境がセットアップされていることを確認してください。
+- Go (1.20+ recommended)
+- `git` command available in your environment
 
-```bash
-# このリポジトリをクローンします（もしあれば）
-git clone https://github.com/your-username/ai-commit-tracker.git
-cd ai-commit-tracker
-```
-
-## ビルド
+## Build
 
 ```bash
 go build -o ai-commit-tracker
 ```
 
-## 使い方
-
-基本的なコマンド構造は以下の通りです。
+## Usage
 
 ```bash
-./ai-commit-tracker --repo <リポジトリのURL> [--author=<作者名>]
+./ai-commit-tracker --repo <repository-url> [--author=<author-name>]
 ```
 
-- `--repo <リポジトリのURL>`: (必須) 分析したいGitリポジトリのURL。
-- `--author=<作者名>`: (任意) 検索したい作者名。デフォルトは `claude` です。
-- `--version`: バージョン情報を表示します。
+Options:
 
-### 例
+- `--repo <repository-url>`: Required. The target Git repository URL.
+- `--author=<author-name>`: Optional. Author string to match. Default: `claude`.
+- `--version`: Show application name and version.
+
+## Examples
 
 ```bash
-# デフォルトの作者 "claude" で検索
-./ai-commit-tracker --repo https://github.com/anthropics/claude-code
+# Search with default author: "claude"
+./ai-commit-tracker --repo https://github.com/ghostty-org/ghostty
 
-# "copilot" という名前の作者で検索
+# Search with a custom author
 ./ai-commit-tracker --repo https://github.com/some/repository --author="copilot"
 ```
 
-### 出力例
+## Output Example
 
+```text
+Repository: ghostty
+AI commit count (author: claude): 5
 ```
-リポジトリ: claude-code
-AIコミット数 (author: claude): 5
+
+Note: The current implementation prints Japanese labels in output:
+
+```text
+リポジトリ: <repo>
+AIコミット数 (author: <author>): <count>
 ```
